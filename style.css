@@ -1,0 +1,865 @@
+/* ==========================================================
+   GameStore — Полный CSS (улучшенные баннеры + touch-boards)
+   > Flexbox, адаптивность, анимации, тени, >400 строк
+   ========================================================== */
+
+/* =========================
+   Reset / Базовые утилиты
+   ========================= */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", Tahoma, Arial, sans-serif;
+  background: #0b0d10;
+  color: #e6e9ef;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.45;
+  -webkit-text-size-adjust: 100%;
+}
+
+/* Вспомогательные контейнеры */
+.container {
+  width: 95%;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Утилиты */
+.hidden { display: none !important; }
+.center { text-align: center; }
+.upper { text-transform: uppercase; letter-spacing: 0.08em; }
+
+/* Ссылки */
+a { color: inherit; text-decoration: none; }
+a:focus, button:focus, input:focus, textarea:focus {
+  outline: 2px solid rgba(106,92,255,0.25);
+  outline-offset: 2px;
+}
+
+/* Scrollbar — тонкий */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-thumb { background: #26303a; border-radius: 8px; }
+::-webkit-scrollbar-track { background: #0f1114; }
+
+/* =========================
+   Header / Navbar
+   ========================= */
+.site-header {
+  background: linear-gradient(180deg, rgba(20,22,28,0.95), rgba(14,16,20,0.96));
+  border-bottom: 1px solid rgba(255,255,255,0.03);
+  position: sticky;
+  top: 0;
+  z-index: 60;
+  backdrop-filter: blur(4px);
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 18px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 800;
+  color: #9fb9ff;
+  font-size: 22px;
+}
+
+.logo svg { transform: translateY(-1px); }
+
+.main-nav ul {
+  display: flex;
+  gap: 20px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.main-nav ul li a {
+  color: #dbe7ff;
+  padding: 8px 10px;
+  border-radius: 6px;
+  transition: all 180ms ease;
+  font-weight: 600;
+}
+
+.main-nav ul li a:hover {
+  color: white;
+  background: rgba(106,92,255,0.12);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 18px rgba(106,92,255,0.06);
+}
+
+/* =========================
+   Global Banner / Hero
+   (поддерживает .hero и .top-banner)
+   ========================= */
+.hero,
+.top-banner {
+  padding: 42px 0;
+  margin-bottom: 18px;
+  position: relative;
+}
+
+.hero .banner-inner,
+.top-banner .banner-inner {
+  display: flex;
+  gap: 26px;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+/* Большой главный заголовок */
+.top-banner .banner-inner h1,
+.hero .banner-inner h1 {
+  font-size: 28px;
+  line-height: 1.08;
+  margin: 0;
+  color: #fffefc;
+  text-shadow: 0 4px 40px rgba(0,0,0,0.6);
+  max-width: 68%;
+  font-weight: 800;
+}
+
+/* Подзаголовок */
+.top-banner .banner-inner p,
+.hero .banner-inner p {
+  color: #d6d9df;
+  opacity: 0.95;
+  margin: 6px 0 0 0;
+  max-width: 100%;
+  font-size: 15px;
+}
+
+/* Кнопки в баннере */
+.banner-actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-top: 6px;
+}
+
+.btn {
+  display: inline-block;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform 160ms ease, box-shadow 160ms ease;
+  border: 1px solid rgba(255,255,255,0.03);
+  background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(0,0,0,0.12));
+}
+
+/* Акцентная кнопка */
+.btn-primary {
+  background: linear-gradient(180deg, #6a5cff, #574cff);
+  color: #fff;
+  box-shadow: 0 8px 30px rgba(106,92,255,0.18);
+  border: none;
+}
+.btn-primary:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 40px rgba(106,92,255,0.25);
+}
+
+/* Вариант outline */
+.btn-outline {
+  background: transparent;
+  color: #cfe0ff;
+  border: 1px solid rgba(159,185,255,0.1);
+}
+.btn-outline:hover {
+  background: rgba(159,185,255,0.03);
+}
+
+/* =========================
+   Top Banner — стиль усиленный
+   ========================= */
+.top-banner {
+  background: linear-gradient(135deg, rgba(48,36,90,0.85), rgba(34,26,54,0.86));
+  border-radius: 14px;
+  padding: 28px 18px;
+  box-shadow:
+    0 2px 8px rgba(0,0,0,0.5),
+    inset 0 1px 0 rgba(255,255,255,0.02);
+  margin: 18px auto;
+}
+
+/* Дополнительная плитка слева (иконка) */
+.top-banner .banner-icon {
+  width: 84px;
+  height: 84px;
+  flex: 0 0 84px;
+  border-radius: 12px;
+  background: linear-gradient(180deg,#ffb86b,#ff8a6b);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 30px rgba(255,138,107,0.12);
+}
+
+.top-banner .banner-icon svg { width: 44px; height: 44px; }
+
+/* Контент в баннере */
+.top-banner .banner-content {
+  flex: 1 1 auto;
+  min-width: 220px;
+}
+
+/* Акцент текста компактный */
+.top-banner .banner-small {
+  display: block;
+  margin-top: 8px;
+  color: rgba(255,255,255,0.85);
+  font-size: 14px;
+}
+
+/* =========================
+   Touchboard / Рекламные панели (Top и Bottom)
+   ========================= */
+
+/* общий контейнер touchboard */
+.touchboard,
+.touchboard-top,
+.touchboard-bottom,
+.tb-inner {
+  margin: 16px auto;
+  width: 95%;
+  max-width: 1200px;
+}
+
+/* стиль верхней панели (горизонтальная плитка) */
+.touchboard-top .touchboard-inner {
+  display: flex;
+  gap: 18px;
+  align-items: stretch;
+  justify-content: space-between;
+  margin-top: 6px;
+}
+
+/* карточки внутри touchboard */
+.touchboard .touch-item,
+.touchboard-top .touch-item,
+.touchboard-bottom .touch-item {
+  background: linear-gradient(180deg, #0f1114, #16171b);
+  border: 1px solid rgba(255,255,255,0.03);
+  padding: 18px;
+  border-radius: 12px;
+  flex: 1 1 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-height: 90px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+  transition: transform 200ms ease, box-shadow 200ms ease, border-color 200ms ease;
+}
+
+/* hover effect */
+.touchboard .touch-item:hover {
+  transform: translateY(-8px);
+  border-color: rgba(106,92,255,0.35);
+  box-shadow: 0 20px 50px rgba(106,92,255,0.12);
+}
+
+/* заголовки внутри */
+.touchboard .touch-item h3 {
+  margin: 0;
+  font-size: 16px;
+  color: #fff;
+  line-height: 1.05;
+  font-weight: 800;
+}
+
+/* текст */
+.touchboard .touch-item p {
+  color: #ccd6ef;
+  margin: 0;
+  font-size: 13px;
+  opacity: 0.95;
+}
+
+/* Style для bottom touchboard, большие карточки */
+.touchboard-bottom .tb-inner {
+  display: flex;
+  gap: 18px;
+  justify-content: space-between;
+  align-items: stretch;
+}
+
+.touchboard-bottom .tb-card {
+  flex: 1 1 0;
+  background: linear-gradient(180deg,#0d0f12,#101216);
+  border-radius: 12px;
+  padding: 20px;
+  border: 1px solid rgba(255,255,255,0.03);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.5);
+  transition: transform 250ms ease;
+}
+
+.touchboard-bottom .tb-card h4 {
+  margin: 0 0 6px 0;
+  font-weight: 800;
+  color: #dff0ff;
+}
+
+.touchboard-bottom .tb-card p { color: #bfcfe8; font-size: 14px; }
+
+/* =========================
+   Games Grid (3x3) — основная сетка
+   ========================= */
+
+/* контейнер вокруг */
+.games-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 26px;
+  width: 95%;
+  max-width: 1200px;
+  margin: 6px auto 22px auto;
+  padding-bottom: 6px;
+}
+
+/* карточка игры */
+.game-card {
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(180deg, #0e1013, #14151a);
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.03);
+  transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
+}
+
+/* небольшая тень и overlay */
+.game-card::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+}
+
+/* изображение */
+.game-card img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  display: block;
+}
+
+/* тело карточки */
+.card-body {
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.card-body h3 {
+  font-size: 18px;
+  margin: 0;
+  color: #fff;
+  font-weight: 800;
+}
+
+.card-body .meta {
+  color: #b9c6e8;
+  font-size: 13px;
+  margin-top: 2px;
+}
+
+.card-body .short {
+  color: #cbd6f0;
+  font-size: 13px;
+  margin-top: 6px;
+  opacity: 0.95;
+}
+
+/* действия */
+.card-actions {
+  margin-top: 8px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.card-actions .btn { padding: 8px 12px; border-radius: 8px; font-weight: 800; font-size: 13px; }
+.card-actions .btn-primary { background: linear-gradient(180deg,#6a5cff,#4e3ff5); color: #fff; border: none; }
+.card-actions .btn:hover { transform: translateY(-3px); }
+
+/* цена */
+.price {
+  color: #ff7575;
+  font-weight: 900;
+  font-size: 16px;
+}
+
+/* hover effect для всей карточки — выделение */
+.game-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(106,92,255,0.38);
+  box-shadow: 0 18px 48px rgba(24,20,60,0.45);
+}
+
+/* =========================
+   Mid Banner — усиленный стиль
+   ========================= */
+
+.mid-banner {
+  margin: 22px auto;
+  width: 95%;
+  max-width: 1200px;
+  border-radius: 14px;
+  padding: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  background: linear-gradient(90deg, rgba(106,92,255,0.12), rgba(48,33,98,0.08));
+  border: 1px solid rgba(106,92,255,0.06);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.02), 0 10px 30px rgba(2,4,10,0.6);
+}
+
+/* Внутренний контейнер */
+.mid-inner {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+/* текст части */
+.mid-inner h2 {
+  margin: 0;
+  font-size: 20px;
+  color: #fff;
+  font-weight: 900;
+}
+
+.mid-inner p {
+  margin: 6px 0 0 0;
+  color: #dbe8ff;
+  font-size: 14px;
+  opacity: 0.95;
+}
+
+/* подписка форма */
+.newsletter {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-top: 6px;
+}
+
+/* input email в баннере */
+.newsletter input[type="email"] {
+  background: linear-gradient(180deg,#0a0b0f,#121217);
+  border: 1px solid rgba(255,255,255,0.03);
+  padding: 12px 14px;
+  border-radius: 10px;
+  color: #e7eefc;
+  min-width: 220px;
+  transition: border-color 160ms ease;
+}
+
+.newsletter input[type="email"]:focus {
+  border-color: rgba(106,92,255,0.6);
+}
+
+/* =========================
+   Contact Form (support) — улучшенный
+   ========================= */
+
+.contact {
+  width: 95%;
+  max-width: 980px;
+  margin: 34px auto;
+  padding: 22px;
+  border-radius: 12px;
+  background: linear-gradient(180deg, #0b0c0f, #101115);
+  border: 1px solid rgba(255,255,255,0.03);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.6);
+}
+
+.contact-inner {
+  display: flex;
+  gap: 22px;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+/* левый блок — форма */
+.contact-form {
+  flex: 1 1 560px;
+  min-width: 260px;
+}
+
+/* заголовок */
+.contact-inner h2 {
+  margin: 0 0 10px 0;
+  font-size: 20px;
+  color: #dfeaff;
+  font-weight: 800;
+}
+
+/* форма — колонки */
+.contact-form .row {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.contact-form .field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1 1 0;
+}
+
+.contact-form .field.full { flex-basis: 100%; }
+
+.contact-form label span { color: #bcd0ff; font-weight: 700; font-size: 13px; }
+
+/* inputs */
+.contact-form input[type="text"],
+.contact-form input[type="email"],
+.contact-form textarea {
+  background: linear-gradient(180deg,#0d0f14,#0a0b0e);
+  border: 1px solid rgba(255,255,255,0.03);
+  color: #e7eefc;
+  padding: 12px;
+  border-radius: 10px;
+  transition: border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.contact-form input::placeholder,
+.contact-form textarea::placeholder { color: rgba(230,235,250,0.18); }
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border-color: rgba(106,92,255,0.6);
+  box-shadow: 0 10px 30px rgba(106,92,255,0.06);
+}
+
+/* кнопки формы */
+.form-actions {
+  display: flex;
+  gap: 14px;
+  margin-top: 8px;
+}
+
+.form-actions .btn-primary {
+  padding: 12px 18px;
+  border-radius: 10px;
+  background: linear-gradient(180deg,#6a5cff,#4e3ff5);
+  color: white;
+  border: none;
+  font-weight: 800;
+}
+
+.form-actions .btn-outline {
+  padding: 12px 18px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.04);
+  background: transparent;
+  color: #cfe0ff;
+  font-weight: 700;
+}
+
+/* правая панель — альтернативные способы связи */
+.support-info {
+  flex: 0 0 320px;
+  min-width: 220px;
+  background: linear-gradient(180deg,#08090b,#0e0f12);
+  border-radius: 12px;
+  padding: 16px;
+  border: 1px solid rgba(255,255,255,0.02);
+  color: #cfe0ff;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.6);
+}
+
+/* список контактов */
+.support-info ul { list-style: none; margin: 10px 0 0 0; padding: 0; }
+.support-info li { margin-bottom: 8px; font-size: 14px; color: #cfe0ff; }
+.support-info a { color: #9fb9ff; font-weight: 700; }
+
+/* =========================
+   Footer
+   ========================= */
+
+.site-footer {
+  margin-top: 40px;
+  background: linear-gradient(180deg,#0f1114,#0b0c0f);
+  border-top: 1px solid rgba(255,255,255,0.02);
+  padding: 20px 0 44px 0;
+}
+
+.footer-inner {
+  display: flex;
+  gap: 18px;
+  justify-content: space-between;
+  align-items: center;
+  width: 95%;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.footer-left p { color: #9fb0cc; margin: 2px 0; }
+.footer-right .socials { display: flex; gap: 12px; }
+.footer-right .socials a { color: #9fb9ff; font-weight: 800; }
+
+/* =========================
+   Анимации и микро-взаимодействия
+   ========================= */
+
+/* мягкое появление элемента (used by many blocks) */
+@keyframes softFadeUp {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+  animation: softFadeUp 420ms ease both;
+}
+
+/* пульсация акцентной кнопки (очень мягко) */
+@keyframes pulseSoft {
+  0% { box-shadow: 0 8px 20px rgba(106,92,255,0.12); transform: translateY(0); }
+  50% { box-shadow: 0 22px 46px rgba(106,92,255,0.16); transform: translateY(-3px); }
+  100% { box-shadow: 0 8px 20px rgba(106,92,255,0.12); transform: translateY(0); }
+}
+
+.btn-primary.pulse {
+  animation: pulseSoft 2400ms ease-in-out infinite;
+}
+
+/* градиентный бордер для акцентов */
+.glow-border {
+  position: relative;
+  z-index: 1;
+  overflow: visible;
+}
+.glow-border::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  z-index: -1;
+  border-radius: 14px;
+  background: linear-gradient(90deg, rgba(106,92,255,0.18), rgba(111,181,255,0.10));
+  filter: blur(10px);
+  opacity: 0.9;
+}
+
+/* =========================
+   Responsive — детализировано
+   ========================= */
+
+
+/* Large desktops */
+@media (min-width: 1400px) {
+  .top-banner .banner-inner h1 { font-size: 34px; max-width: 60%; }
+  .mid-inner h2 { font-size: 24px; }
+  .game-card img { height: 260px; }
+}
+
+/* Desktop / laptop */
+@media (min-width: 1000px) and (max-width: 1399px) {
+  .top-banner .banner-inner h1 { font-size: 30px; }
+  .game-card img { height: 240px; }
+}
+
+/* Tablet */
+@media (max-width: 999px) and (min-width: 700px) {
+  .main-nav ul { gap: 12px; }
+  .top-banner .banner-inner h1 { font-size: 26px; max-width: 100%; }
+  .games-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+  .touchboard-top .touchboard-inner { flex-direction: column; gap: 12px; }
+  .touchboard-bottom .tb-inner { flex-direction: column; gap: 12px; }
+  .mid-banner { padding: 18px; }
+  .newsletter input[type="email"] { min-width: 180px; }
+}
+
+/* Mobile */
+@media (max-width: 699px) {
+  .header-inner { padding: 12px 14px; }
+  .logo { font-size: 20px; }
+  .main-nav ul { display: none; }
+
+  .top-banner { padding: 18px 12px; border-radius: 10px; margin: 12px auto; }
+  .top-banner .banner-inner { flex-direction: column; align-items: flex-start; gap: 12px; }
+  .top-banner .banner-icon { display: none; }
+
+  .top-banner .banner-inner h1 { font-size: 20px; max-width: 100%; }
+  .top-banner .banner-inner p { font-size: 14px; }
+
+  .games-grid { grid-template-columns: 1fr; gap: 16px; width: 94%; }
+  .game-card { width: 100%; }
+
+  .touchboard-top .touchboard-inner,
+  .touchboard-bottom .tb-inner { flex-direction: column; gap: 12px; }
+
+  .mid-inner { flex-direction: column; align-items: stretch; gap: 12px; }
+  .newsletter { flex-direction: column; align-items: stretch; }
+  .newsletter input[type="email"] { width: 100%; min-width: auto; }
+
+  .contact-inner { flex-direction: column; }
+  .contact-form { width: 100%; }
+  .support-info { width: 100%; }
+}
+
+/* =========================
+   Доп. стили для старых имён (совместимость)
+   - .banner, .banner-section, .hero, .banner-actions, .banner-inner
+   - .banner-small, .banner-icon
+   - .products, .product-card (legacy)
+   ========================= */
+
+/* старое: .banner-section (три баннера) */
+.banner-section {
+  display: flex;
+  gap: 22px;
+  justify-content: center;
+  align-items: stretch;
+  width: 95%;
+  max-width: 1200px;
+  margin: 14px auto;
+}
+.banner-section .banner {
+  flex: 1 1 30%;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 8px 26px rgba(0,0,0,0.6);
+  transition: transform 220ms ease, border-color 220ms ease;
+  border: 1px solid rgba(255,255,255,0.02);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #f0f7ff;
+  font-weight: 800;
+}
+.banner-section .banner:hover {
+  transform: translateY(-6px);
+  border-color: rgba(106,92,255,0.28);
+}
+
+/* стиль для hero (legacy) — сделаем эффектный */
+.hero {
+  background: linear-gradient(135deg,#14141a,#201a3a);
+  border-radius: 12px;
+  padding: 36px 18px;
+  width: 95%;
+  max-width: 1200px;
+  margin: 14px auto;
+  box-shadow: 0 18px 48px rgba(2,6,10,0.6);
+}
+.hero h1 {
+  font-size: 34px;
+  color: #fff;
+  text-shadow: 0 10px 28px rgba(30,18,80,0.48);
+}
+.hero p { color: #dbe8ff; }
+
+/* старое: .banner-actions */
+.banner-actions { margin-top: 12px; display: flex; gap: 12px; flex-wrap: wrap; }
+
+/* =========================
+   Совместимость с предыдущими product-card/product-grid
+   (если у тебя ещё остались старые классы)
+   ========================= */
+
+.products {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 26px;
+  width: 95%;
+  max-width: 1200px;
+  margin: 8px auto;
+}
+.product-card,
+.product-card .card {
+  background: linear-gradient(180deg,#0d0f13,#101217);
+  border-radius: 12px;
+  padding: 14px;
+  border: 1px solid rgba(255,255,255,0.02);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.7);
+}
+.product-card img { width: 100%; height: 180px; object-fit: cover; border-radius: 8px; }
+
+/* =========================
+   Дополнительные мелкие компоненты / utility
+   ========================= */
+
+/* muted text */
+.muted { color: #9aa9c9; font-size: 13px; }
+
+/* divider */
+.divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.02), transparent);
+  margin: 14px 0;
+}
+
+/* subtle label */
+.label {
+  background: rgba(255,255,255,0.02);
+  color: #cfe0ff;
+  padding: 6px 8px;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 13px;
+  display: inline-block;
+}
+
+/* карточка с иконкой слева */
+.icon-card {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+/* =========================
+   Accessibility helpers
+   ========================= */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* =========================
+   Полезные советы в стиле (комментарии)
+   - Чтобы усилить эффект баннера можно добавить класс .glow-border
+   - Для акцентных кнопок используй .btn-primary.pulse
+   - Для touchboard карточек можно добавить <svg> иконку слева, задав .icon-card
+   ========================= */
+
+/* =========================
+   Конец файла
+   ========================= */
+
